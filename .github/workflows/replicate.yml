@@ -3,22 +3,20 @@ name: Push to Replicate
 on:
   push:
     branches:
-      - main
+      - "main"
 
 jobs:
-  build_and_push:
+  build-and-push:
     runs-on: ubuntu-latest
+    
     steps:
-      # Step 1: Checkout the repository
-      - name: Checkout the repository
+      - name: Check out the repository
         uses: actions/checkout@v3
 
-      # Step 2: Set up Cog
       - name: Set up Cog
-        uses: actions/setup-cog@v3
+        uses: replicate/setup-cog@v1
         with:
           token: ${{ secrets.REPLICATE_API_TOKEN }}
 
-      # Step 3: Build and push the model
-      - name: Build the model
-        uses: cog push
+      - name: Build and push the model
+        run: cog push
