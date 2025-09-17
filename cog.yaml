@@ -12,8 +12,8 @@ build:
   # This is the correct, automatic way to install Python packages
   python_requirements: "requirements.txt"
 
-# This last 'run' command is optional, but good for downloading weights after setup
-run:
-  - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
+  # This last 'run' command is optional, but good for downloading weights after setup
+  run:
+    - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
 
 predict: "predict.py:Predictor"
