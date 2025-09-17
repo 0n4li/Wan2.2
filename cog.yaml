@@ -18,9 +18,9 @@ build:
   # This now succeeds because 'packaging' is already installed.
   python_requirements: "requirements.txt"
 
-# Step 3: This separate 'run' block executes AFTER everything is installed.
-# It's the perfect place to download model weights.
-run:
-  - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
+  # Step 3: This separate 'run' block executes AFTER everything is installed.
+  # It's the perfect place to download model weights.
+  run:
+    - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
 
 predict: "predict.py:Predictor"
