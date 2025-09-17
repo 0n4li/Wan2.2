@@ -24,9 +24,9 @@ build:
 
     # STEP 5: DIAGNOSE and EXPLICITLY LOG IN
     # This next line is a safe test. It will print "Token set: true" if the variable is not empty.
-    - 'echo "Token set: ${HUGGING_FACE_HUB_TOKEN:+true}"'
+    - 'echo "Token set: ${HF_TOKEN:+true}"'
     # By quoting the variable, we make the command more robust.
-    - 'huggingface-cli login --token "$HUGGING_FACE_HUB_TOKEN"'
+    - 'hf auth login'
     
     # STEP 6: DOWNLOAD
     - "hf download --repo-id Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
