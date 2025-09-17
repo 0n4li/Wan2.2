@@ -24,13 +24,13 @@ build:
 
     # STEP 4: Authenticate using the mounted secret file.
     # This is the special structured command from the documentation.
-    - command: "huggingface-cli login --token $(cat /run/secrets/hf_token_file)"
+    - command: "huggingface-cli login --token $(cat /etc/hf_token_file)"
       mounts:
         - type: secret
           # This 'id' must match the 'id' in the --secret flag.
           id: hf_secret
           # This is the path where the secret file will be available inside the container.
-          target: /run/secrets/hf_token_file
+          target: /etc/hf_token_file
     
     # STEP 5: DOWNLOAD
     - "hf download --repo-id Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
