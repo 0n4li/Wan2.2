@@ -33,6 +33,6 @@ build:
           target: /etc/hf_token_file
     
     # STEP 5: DOWNLOAD
-    - "hf download --repo-id Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
+    - "hf download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
 predict: "predict.py:Predictor"
