@@ -14,7 +14,7 @@ build:
 
   # NOTE: remove python_requirements entirely (we'll install in run)
   run:
-    - 'echo "--- Start: Listing files ---" && ls -la && echo "--- End: Listing files ---" && python -m pip install --upgrade pip setuptools wheel packaging && python -m pip install --prefer-binary -r requirements.txt'
+    - 'cd /src && echo "--- Listing files in /src ---" && ls -la && python -m pip install --upgrade pip setuptools wheel packaging && python -m pip install --prefer-binary -r requirements.txt'
     # bootstrap pip + build tooling BEFORE installing requirements
     - "python -m pip install --upgrade pip setuptools wheel packaging"
     # install the project's Python deps from requirements (prefer wheels)
