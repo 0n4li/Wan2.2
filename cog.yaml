@@ -1,7 +1,25 @@
+# cog.yaml (replace the previous content)
 build:
   gpu: true
   python_version: "3.11"
-  python_requirements: cog_requirements.txt
+
+  # install system build tools so native builds can succeed if required
+  system_packages:
+    - build-essential
+    - cmake
+    - ninja-build
+    - git
+    - python3-dev
+    - ffmpeg
+
+  # NOTE: remove python_requirements entirely (we'll install in run)
   run:
     - "echo env ready!"
+    # bootstrap pip + build tooling BEFORE installing requirements
+    - "python -m pip install --upgrade pip setuptools wheel packaging"
+    # install the project's Python deps from requirements (prefer wheels)
+    - "python -m pip install --prefer-binary -r cog_requirements.txt"
+    # any further setup (e.g. download weights)
     - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
+
+predict: "predict.py:Predictor"
