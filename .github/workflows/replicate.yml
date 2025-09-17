@@ -16,6 +16,14 @@ jobs:
       - name: Clear CUDA cache
         run: rm -rf /opt/hostedtoolcache/cuda_installer-linux || true
 
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf /usr/local/share/boost
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          df -h
+
       - name: Set up CUDA
         uses: Jimver/cuda-toolkit@v0.2.27
         with:
