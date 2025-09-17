@@ -24,7 +24,7 @@ build:
 
     # STEP 5: DIAGNOSE and EXPLICITLY LOG IN
     # This next line is a safe test. It will print "Token set: true" if the variable is not empty.
-    - 'echo "Token set: ${HF_TOKEN:+true}" && exit 1'
+    - 'echo "Token set: $HF_TOKEN" && exit 1'
     # By quoting the variable, we make the command more robust.
     - 'hf auth login'
     
