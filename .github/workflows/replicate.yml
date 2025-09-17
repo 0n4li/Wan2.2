@@ -16,6 +16,11 @@ jobs:
       - name: Clear CUDA cache
         run: rm -rf /opt/hostedtoolcache/cuda_installer-linux || true
 
+      - name: Set up CUDA
+        uses: Jimver/cuda-toolkit@v0.2.27
+        with:
+          cuda: "12.2.0"
+
       - name: Set up Cog
         uses: replicate/setup-cog@v1
         with:
