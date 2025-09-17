@@ -9,8 +9,6 @@ build:
     - "git"
     - "python3-dev"
     - "ffmpeg"
-  secrets:
-    - HUGGING_FACE_HUB_TOKEN
   run:
     # STEP 1: Upgrade pip and install the build-time dependency for flash-attn.
     - "pip install --upgrade pip packaging"
