@@ -10,15 +10,18 @@ build:
     - "python3-dev"
     - "ffmpeg"
   run:
-    # STEP 1: CRITICAL - Install the build-time dependency for flash-attn FIRST.
+    # STEP 1: Upgrade pip and install the build-time dependency for flash-attn.
     - "pip install --upgrade pip packaging"
-    - "pip install --upgrade torch>=2.4.0"
 
-    # STEP 2: Install all packages in a single-line command.
-    # This is a very long line, but it is the correct format for Cog.
-    - 'pip install torchvision>=0.19.0 torchaudio opencv-python>=4.9.0.80 diffusers>=0.31.0 "transformers>=4.49.0,<=4.51.3" tokenizers>=0.20.3 accelerate>=1.1.1 tqdm "imageio[ffmpeg]" easydict ftfy dashscope flash_attn "numpy>=1.23.5,<2" openai-whisper HyperPyYAML onnxruntime inflect wetext omegaconf conformer hydra-core lightning rich gdown matplotlib wget pyarrow pyworld librosa decord modelscope GitPython'
+    # STEP 2: Install PyTorch, torchvision, and torchaudio from the official
+    # PyTorch index for CUDA 11.8. This is the critical change.
+    - "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118"
 
-    # STEP 3: Download model weights after all Python packages are installed.
+    # STEP 3: Install the remaining packages.
+    # Note: torch, torchvision, and torchaudio have been removed from this list.
+    - 'pip install opencv-python>=4.9.0.80 diffusers>=0.31.0 "transformers>=4.49.0,<=4.51.3" tokenizers>=0.20.3 accelerate>=1.1.1 tqdm "imageio[ffmpeg]" easydict ftfy dashscope flash_attn "numpy>=1.23.5,<2" openai-whisper HyperPyYAML onnxruntime inflect wetext omegaconf conformer hydra-core lightning rich gdown matplotlib wget pyarrow pyworld librosa decord modelscope GitPython'
+
+    # STEP 4: Download model weights.
     - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
 predict: "predict.py:Predictor"
