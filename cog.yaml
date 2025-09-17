@@ -16,7 +16,7 @@ build:
     # STEP 2: Install PyTorch, torchvision, and torchaudio from the official
     # PyTorch index for CUDA 11.8. This is the critical change.
     - "pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118"
-    - "pip install flash_attn"
+    - "pip install https://github.com/Dao-AILab/flash-attention/releases/download/v2.7.3/flash_attn-2.7.3+cu11torch2.4cxx11abiTRUE-cp311-cp311-linux_x86_64.whl"
 
     # STEP 3: Install the remaining packages.
     # Note: torch, torchvision, and torchaudio have been removed from this list.
