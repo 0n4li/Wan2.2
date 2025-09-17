@@ -12,7 +12,7 @@ easydict
 ftfy
 dashscope
 imageio-ffmpeg
-flash_attn
+flash_attn==2.5.6
 numpy>=1.23.5,<2
 openai-whisper
 HyperPyYAML
