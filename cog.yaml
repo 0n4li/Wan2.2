@@ -15,6 +15,8 @@ build:
   # NOTE: remove python_requirements entirely (we'll install in run)
   run:
     - "echo env ready!"
+    - "pwd"
+    - "ls"
     - "ls -R /src"
     # bootstrap pip + build tooling BEFORE installing requirements
     - "python -m pip install --upgrade pip setuptools wheel packaging"
