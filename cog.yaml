@@ -1,7 +1,10 @@
 build:
   gpu: true
   python_version: "3.11"
-  python_requirements: "requirements.txt"
+
+  # The `python_requirements` key MUST be removed.
+  # We are taking full manual control of the installation order.
+
   system_packages:
     - "build-essential"
     - "cmake"
@@ -9,8 +12,21 @@ build:
     - "git"
     - "python3-dev"
     - "ffmpeg"
+
   run:
-    - "pip install --upgrade pip"
+    # STEP 1: Diagnostic check. This command will fail the build
+    # if requirements.txt is not found in the current directory (/src).
+    # This removes all guesswork about the file's location.
+    - "test -f requirements.txt || (echo 'ERROR: requirements.txt not found in /src' && exit 1)"
+
+    # STEP 2: Pre-install the build-time dependency for flash-attn.
+    # This MUST complete before we try to install flash-attn.
+    - "pip install --upgrade pip packaging"
+
+    # STEP 3: Install all packages from the now-verified requirements.txt.
+    - "pip install -r requirements.txt"
+
+    # STEP 4: Download model weights after all Python packages are installed.
     - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
 predict: "predict.py:Predictor"
