@@ -1,2 +1,4 @@
-requirements.txt
-requirements_s2v.txt
+!requirements.txt
+!requirements_s2v.txt
+!cog.yaml
+!predict.py
