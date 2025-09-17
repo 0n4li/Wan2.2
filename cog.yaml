@@ -2,8 +2,9 @@ build:
   gpu: true
   python_version: "3.11"
 
-  # The `python_requirements` key MUST be removed.
-  # We are taking full manual control of the installation order.
+  # Let Cog handle the requirements file as intended.
+  # This will be executed AFTER the 'run' block below.
+  python_requirements: "requirements.txt"
 
   system_packages:
     - "build-essential"
@@ -13,20 +14,13 @@ build:
     - "python3-dev"
     - "ffmpeg"
 
+  # This 'run' block is executed BEFORE 'python_requirements' is processed.
   run:
-    # STEP 1: Diagnostic check. This command will fail the build
-    # if requirements.txt is not found in the current directory (/src).
-    # This removes all guesswork about the file's location.
-    - "test -f requirements.txt || (echo 'ERROR: requirements.txt not found in /src' && exit 1)"
-
-    # STEP 2: Pre-install the build-time dependency for flash-attn.
-    # This MUST complete before we try to install flash-attn.
+    # Step 1: Upgrade pip and pre-install the build-time dependency for flash-attn.
+    # This command does not need any project files and will succeed.
     - "pip install --upgrade pip packaging"
 
-    # STEP 3: Install all packages from the now-verified requirements.txt.
-    - "pip install -r requirements.txt"
-
-    # STEP 4: Download model weights after all Python packages are installed.
+    # Step 2: Download the model weights.
     - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
 predict: "predict.py:Predictor"
