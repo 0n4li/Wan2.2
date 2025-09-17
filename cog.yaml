@@ -1,6 +1,4 @@
-# This is the top level of the file, with no indentation.
 build:
-  # Everything in this section must be indented by two spaces.
   gpu: true
   python_version: "3.11"
   system_packages:
@@ -10,18 +8,7 @@ build:
     - "git"
     - "python3-dev"
     - "ffmpeg"
-
-  # This 'run' block is part of 'build', so it's indented.
-  run:
-    # The command itself is also indented and starts with '- '.
-    - "pip install --upgrade pip setuptools wheel packaging"
-
-  # This is also part of 'build' and at the same indentation level as 'run'.
   python_requirements: "requirements.txt"
-
-  # This 'run' block is for AFTER the build. It is NOT indented.
   run:
+    - "pip install --upgrade pip setuptools wheel packaging"
     - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
-
-# This is also at the top level.
-predict: "predict.py:Predictor"
