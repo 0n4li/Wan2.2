@@ -2,10 +2,7 @@ build:
   gpu: true
   python_version: "3.11"
 
-  # Let Cog handle the requirements file as intended.
-  # This will be executed AFTER the 'run' block below.
-  python_requirements: "requirements.txt"
-
+  # python_requirements is NOT used. All installation is manual.
   system_packages:
     - "build-essential"
     - "cmake"
@@ -14,13 +11,51 @@ build:
     - "python3-dev"
     - "ffmpeg"
 
-  # This 'run' block is executed BEFORE 'python_requirements' is processed.
   run:
-    # Step 1: Upgrade pip and pre-install the build-time dependency for flash-attn.
-    # This command does not need any project files and will succeed.
+    # STEP 1: CRITICAL - Install the build-time dependency for flash-attn FIRST.
+    # This command must run and complete before the next one starts.
     - "pip install --upgrade pip packaging"
 
-    # Step 2: Download the model weights.
+    # STEP 2: Install all the packages from your list.
+    # The '|' and '\' at the end of each line create a single, clean command.
+    - |
+      pip install \
+        torch>=2.4.0 \
+        torchvision>=0.19.0 \
+        torchaudio \
+        opencv-python>=4.9.0.80 \
+        diffusers>=0.31.0 \
+        "transformers>=4.49.0,<=4.51.3" \
+        tokenizers>=0.20.3 \
+        accelerate>=1.1.1 \
+        tqdm \
+        "imageio[ffmpeg]" \
+        easydict \
+        ftfy \
+        dashscope \
+        flash_attn \
+        "numpy>=1.23.5,<2" \
+        openai-whisper \
+        HyperPyYAML \
+        onnxruntime \
+        inflect \
+        wetext \
+        omegaconf \
+        conformer \
+        hydra-core \
+        lightning \
+        rich \
+        gdown \
+        matplotlib \
+        wget \
+        pyarrow \
+        pyworld \
+        librosa \
+        decord \
+        modelscope \
+        GitPython
+
+    # STEP 3: Download model weights after all Python packages are installed.
     - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
 predict: "predict.py:Predictor"
