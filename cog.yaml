@@ -1,4 +1,6 @@
+# This is the top level of the file, with no indentation.
 build:
+  # Everything in this section must be indented by two spaces.
   gpu: true
   python_version: "3.11"
   system_packages:
@@ -9,18 +11,17 @@ build:
     - "python3-dev"
     - "ffmpeg"
 
-  # Step 1: Pre-install the build-time dependencies.
-  # This 'run' block executes BEFORE 'python_requirements'.
+  # This 'run' block is part of 'build', so it's indented.
   run:
+    # The command itself is also indented and starts with '- '.
     - "pip install --upgrade pip setuptools wheel packaging"
 
-  # Step 2: Let Cog automatically install everything from your requirements file.
-  # This now succeeds because 'packaging' is already installed.
+  # This is also part of 'build' and at the same indentation level as 'run'.
   python_requirements: "requirements.txt"
 
-  # Step 3: This separate 'run' block executes AFTER everything is installed.
-  # It's the perfect place to download model weights.
-  run:
-    - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
+# This 'run' block is for AFTER the build. It is NOT indented.
+run:
+  - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
+# This is also at the top level.
 predict: "predict.py:Predictor"
