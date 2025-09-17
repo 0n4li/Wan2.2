@@ -11,7 +11,8 @@ build:
     - "ffmpeg"
   run:
     # STEP 1: CRITICAL - Install the build-time dependency for flash-attn FIRST.
-    - "pip install --upgrade pip packaging torch>=2.4.0"
+    - "pip install --upgrade pip packaging"
+    - "pip install --upgrade torch>=2.4.0"
 
     # STEP 2: Install all packages in a single-line command.
     # This is a very long line, but it is the correct format for Cog.
