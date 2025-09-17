@@ -1,6 +1,7 @@
 build:
   gpu: true
   python_version: "3.11"
+  python_requirements: "requirements.txt"
   system_packages:
     - "build-essential"
     - "cmake"
@@ -8,7 +9,8 @@ build:
     - "git"
     - "python3-dev"
     - "ffmpeg"
-  python_requirements: "requirements.txt"
   run:
-    - "pip install --upgrade pip setuptools wheel packaging"
+    - "pip install --upgrade pip"
     - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
+
+predict: "predict.py:Predictor"
