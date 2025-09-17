@@ -19,9 +19,9 @@ build:
   # This is also part of 'build' and at the same indentation level as 'run'.
   python_requirements: "requirements.txt"
 
-# This 'run' block is for AFTER the build. It is NOT indented.
-run:
-  - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
+  # This 'run' block is for AFTER the build. It is NOT indented.
+  run:
+    - "huggingface-cli download Wan-AI/Wan2.2-S-2-V-14-B --local-dir ./Wan-2.2-S-2-V-14-B"
 
 # This is also at the top level.
 predict: "predict.py:Predictor"
