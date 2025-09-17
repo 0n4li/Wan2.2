@@ -1,11 +1,6 @@
 build:
   gpu: true
   python_version: "3.11"
-  python_packages:
-    - pip>=25.2
-    - setuptools>=42
-    - wheel
-    - packaging
   python_requirements: cog_requirements.txt
   run:
     - "echo env ready!"
