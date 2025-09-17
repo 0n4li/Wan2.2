@@ -18,9 +18,9 @@ build:
     # bootstrap pip + build tooling BEFORE installing requirements
     - "python -m pip install --upgrade pip setuptools wheel packaging"
     # install the project's Python deps from requirements (prefer wheels)
-    - "python -m pip install --prefer-binary -r requirements.txt"
+    - "python -m pip install --prefer-binary -r /src/requirements.txt"
     # install the project's Python deps from requirements (prefer wheels)
-    - "python -m pip install --prefer-binary -r requirements_s2v.txt"
+    - "python -m pip install --prefer-binary -r /src/requirements_s2v.txt"
     # any further setup (e.g. download weights)
     - "huggingface-cli download Wan-AI/Wan2.2-S2V-14B --local-dir ./Wan2.2-S2V-14B"
 
