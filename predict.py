@@ -12,7 +12,7 @@ class Predictor(BasePredictor):
         The model weights are already downloaded in the build step (cog.yaml),
         so we just confirm the path here.
         """
-        self.model_ckpt_dir = "./Wan2.2-S2V-14B/"
+        self.model_ckpt_dir = "/models/Wan2.2-S2V-14B/"
         print("Setup complete. Model weights are located at:", self.model_ckpt_dir)
 
     def predict(
